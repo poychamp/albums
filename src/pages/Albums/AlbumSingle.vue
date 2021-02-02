@@ -5,10 +5,10 @@
         <q-infinite-scroll @load="onLoad"
                            class="row"
                            :offset="250">
-            <div v-for="(image, index) in images"
+            <div v-for="(photo, index) in photos"
                  :key="index"
-                 class="text-center col-md-3">
-                <q-img :src="image.thumbnail_url"
+                 class="text-center col-md-3 q-mb-sm">
+                <q-img :src="photo.thumbnail_url"
                        spinner-color="white"
                        class="q-mb-sm"
                        style="max-width: 150px"
@@ -31,26 +31,29 @@
 </template>
 
 <script>
+import { api } from 'boot/axios'
+
 export default {
   name: 'AlbumSingle',
 
   data () {
     return {
-      images: []
+      album: {
+        id: 1
+      },
+      photos: []
     }
   },
 
   methods: {
     onLoad (index, done) {
-      this.images = [
-        {
-          title: 'some image title',
-          url: 'http://some-url.com/',
-          thumbnail_url: 'https://via.placeholder.com/150/92c952'
-        }
-      ]
+      api.get(`/api/albums/${this.album.id}/photos`, {
+        params: { page: index }
+      }).then(({ data }) => {
+        this.photos = this.photos.concat(data.data)
 
-      done(true)
+        done(data.meta.current_page >= data.meta.last_page)
+      })
     }
   }
 }
