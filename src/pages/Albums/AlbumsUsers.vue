@@ -1,12 +1,13 @@
 <template>
     <q-page v-if="user.id">
-        <h2 class="q-mt-none q-mb-md">My Name's Albums</h2>
+        <h2 class="q-mt-none q-mb-md">{{ user.name }} Albums</h2>
 
         <albums-infinite-scroll api-url="/api/albums" />
     </q-page>
 </template>
 
 <script>
+import { api } from 'boot/axios'
 import AlbumsInfiniteScroll from 'components/AlbumsInfiniteScroll.vue'
 
 export default {
@@ -16,11 +17,21 @@ export default {
     AlbumsInfiniteScroll
   },
 
+  async beforeRouteEnter (to, from, next) {
+    const { data } = await api.get(`/api/users/${to.params.id}`)
+
+    next(vm => vm.setData(data.data))
+  },
+
   data: () => ({
-    user: {
-      id: 1
+    user: {}
+  }),
+
+  methods: {
+    setData (user) {
+      this.user = user
     }
-  })
+  }
 }
 </script>
 
