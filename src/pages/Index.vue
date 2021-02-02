@@ -3,9 +3,9 @@
       <q-infinite-scroll @load="onLoad"
                          class="row"
                          :offset="250">
-        <div v-for="(item, index) in items" :key="index" class="text-center col-md-4">
+        <div v-for="(album, index) in albums" :key="index" class="text-center col-md-4">
           <a href="#">
-            <h2 class="text-h5">Album Name</h2>
+            <h2 class="text-h5">{{ album.title }}</h2>
           </a>
         </div>
 
@@ -19,21 +19,26 @@
 </template>
 
 <script>
+import { api } from 'boot/axios'
+
 export default {
   name: 'PageIndex',
 
   data () {
     return {
-      items: [{}, {}, {}, {}]
+      albums: []
     }
   },
 
   methods: {
     onLoad (index, done) {
-      setTimeout(() => {
-        // this.items.push({}, {}, {})
-        done(true)
-      }, 2000)
+      api.get('/api/albums', {
+        params: { page: index }
+      }).then(({ data }) => {
+        this.albums = this.albums.concat(data.data)
+
+        done(data.meta.current_page >= data.meta.last_page)
+      })
     }
   }
 }
