@@ -1,6 +1,6 @@
 <template>
     <q-page>
-        <h1 class="q-mt-none q-mb-md">Album Title</h1>
+        <h1 class="q-mt-none q-mb-md">{{ album.title }}</h1>
 
         <q-infinite-scroll @load="onLoad"
                            class="row"
@@ -36,18 +36,26 @@ import { api } from 'boot/axios'
 export default {
   name: 'AlbumSingle',
 
+  async beforeRouteEnter (to, from, next) {
+    const { data } = await api.get(`/api/albums/${to.params.id}`)
+
+    next(vm => vm.setData(data.data))
+  },
+
   data () {
     return {
-      album: {
-        id: 1
-      },
+      album: {},
       photos: []
     }
   },
 
   methods: {
+    setData (album) {
+      this.album = album
+    },
+
     onLoad (index, done) {
-      api.get(`/api/albums/${this.album.id}/photos`, {
+      api.get(`/api/albums/${this.$route.params.id}/photos`, {
         params: { page: index }
       }).then(({ data }) => {
         this.photos = this.photos.concat(data.data)
