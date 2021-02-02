@@ -8,6 +8,7 @@ const routes = [
       { path: '/albums/:id', component: () => import('pages/Albums/AlbumSingle.vue'), name: 'albums.single' },
       { path: '/photos/:id/edit', component: () => import('pages/Photos/PhotoEdit.vue'), name: 'photos.edit' },
       { path: '/photos/:id', component: () => import('pages/Photos/PhotoShow.vue'), name: 'photos.show' },
+      { path: '/users/:id/albums', component: () => import('pages/Albums/AlbumsUsers.vue'), name: 'users.albums' },
       { path: '/users/', component: () => import('pages/Users/UsersIndex.vue'), name: 'users.index' }
     ]
   },

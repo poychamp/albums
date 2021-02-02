@@ -6,9 +6,9 @@
             <div v-for="(user, index) in users"
                  :key="index"
                  class="text-center col-md-4">
-                <a href="#">
+                <router-link :to="{ name: 'users.albums', params: { id: user.id } }">
                     <h2 class="text-h5 text-center" to="/">{{ user.name }}</h2>
-                </a>
+                </router-link>
             </div>
 
             <template v-slot:loading>
