@@ -18,8 +18,12 @@
                     <router-link :to="{ name: 'photos.show', params: { id: photo.id } }">
                         <q-btn color="primary" class="q-mr-xs" label="View" />
                     </router-link>
+
                     <q-btn color="secondary" class="q-mr-xs" label="Edit" />
-                    <q-btn color="deep-orange" label="Remove" />
+
+                    <q-btn color="deep-orange"
+                           label="Remove"
+                           @click="onClickRemove(photo.id, index)" />
                 </div>
             </div>
 
@@ -29,6 +33,23 @@
                 </div>
             </template>
         </q-infinite-scroll>
+
+        <q-dialog v-model="isShowRemovePhotoDialog" persistent>
+            <q-card>
+                <q-card-section class="row items-center">
+                    <span class="q-ml-sm">Are you sure you want to remove this photo?</span>
+                </q-card-section>
+
+                <q-card-actions align="right">
+                    <q-btn flat label="Cancel" color="primary" v-close-popup />
+                    <q-btn flat
+                           label="Yes"
+                           color="primary"
+                           @click="onClickYesRemovePhotoBtn"
+                           v-close-popup />
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
     </q-page>
 </template>
 
@@ -47,7 +68,12 @@ export default {
   data () {
     return {
       album: {},
-      photos: []
+      photos: [],
+      isShowRemovePhotoDialog: false,
+      removePhoto: {
+        id: null,
+        index: null
+      }
     }
   },
 
@@ -64,6 +90,16 @@ export default {
 
         done(data.meta.current_page >= data.meta.last_page)
       })
+    },
+
+    onClickRemove (photoId, index) {
+      this.isShowRemovePhotoDialog = true
+      this.removePhoto.id = photoId
+      this.removePhoto.index = index
+    },
+
+    onClickYesRemovePhotoBtn () {
+      this.photos.splice(this.removePhoto.index, 1)
     }
   }
 }
