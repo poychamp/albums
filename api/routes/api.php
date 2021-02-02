@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'albums'], function() {
     Route::get('/{album}/photos', [\App\Http\Controllers\AlbumController::class, 'photos']);
+    Route::get('/{album}', [\App\Http\Controllers\AlbumController::class, 'show']);
     Route::get('/', [\App\Http\Controllers\AlbumController::class, 'index']);
 });
 

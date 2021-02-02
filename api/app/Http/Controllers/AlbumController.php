@@ -30,4 +30,14 @@ class AlbumController extends Controller
 
         return PhotoResource::collection($photos);
     }
+
+    /**
+     * @param \App\Models\Album $album
+     *
+     * @return \App\Http\Resources\AlbumResource
+     */
+    public function show(Album $album)
+    {
+        return new AlbumResource($album);
+    }
 }
