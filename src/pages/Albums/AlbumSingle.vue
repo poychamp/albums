@@ -19,7 +19,9 @@
                         <q-btn color="primary" class="q-mr-xs" label="View" />
                     </router-link>
 
-                    <q-btn color="secondary" class="q-mr-xs" label="Edit" />
+                    <router-link :to="{ name: 'photos.edit', params: { id: photo.id } }">
+                        <q-btn color="secondary" class="q-mr-xs" label="Edit" />
+                    </router-link>
 
                     <q-btn color="deep-orange"
                            label="Remove"

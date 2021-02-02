@@ -6,6 +6,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/albums/:id', component: () => import('pages/Albums/AlbumSingle.vue'), name: 'albums.single' },
+      { path: '/photos/:id/edit', component: () => import('pages/Photos/PhotoEdit.vue'), name: 'photos.edit' },
       { path: '/photos/:id', component: () => import('pages/Photos/PhotoShow.vue'), name: 'photos.show' }
     ]
   },
