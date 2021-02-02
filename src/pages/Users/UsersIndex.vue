@@ -21,7 +21,7 @@
 </template>
 
 <script>
-// import { api } from 'boot/axios'
+import { api } from 'boot/axios'
 
 export default {
   name: 'UsersIndex',
@@ -32,12 +32,13 @@ export default {
 
   methods: {
     onLoad (index, done) {
-      this.users = [
-        { name: 'User 1' },
-        { name: 'User 2' },
-        { name: 'User 3' }
-      ]
-      done(true)
+      api.get('/api/users', {
+        params: { page: index }
+      }).then(({ data }) => {
+        this.users = this.users.concat(data.data)
+
+        done(data.meta.current_page >= data.meta.last_page)
+      })
     }
   }
 }
