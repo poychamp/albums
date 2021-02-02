@@ -20,6 +20,10 @@ Route::group(['prefix' => 'albums'], function() {
     Route::get('/', [\App\Http\Controllers\AlbumController::class, 'index']);
 });
 
+Route::group(['prefix' => 'photos'], function() {
+    Route::get('/{photo}', [\App\Http\Controllers\PhotoController::class, 'show']);
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
