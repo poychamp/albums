@@ -57,7 +57,7 @@ const linksData = [
   },
   {
     title: 'Users',
-    to: { name: 'index' },
+    to: { name: 'users.index' },
     icon: 'person'
   }
 ]
