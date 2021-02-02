@@ -2,7 +2,7 @@
     <q-page v-if="user.id">
         <h2 class="q-mt-none q-mb-md">{{ user.name }} Albums</h2>
 
-        <albums-infinite-scroll api-url="/api/albums" />
+        <albums-infinite-scroll :api-url="`/api/users/${user.id}/albums`" />
     </q-page>
 </template>
 
