@@ -22,6 +22,7 @@ Route::group(['prefix' => 'albums'], function() {
 
 Route::group(['prefix' => 'photos'], function() {
     Route::get('/{photo}', [\App\Http\Controllers\PhotoController::class, 'show']);
+    Route::delete('/{photo}', [\App\Http\Controllers\PhotoController::class, 'destroy']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

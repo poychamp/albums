@@ -17,4 +17,19 @@ class PhotoController extends Controller
     {
         return new PhotoResource($photo);
     }
+
+    /**
+     * @param \App\Models\Photo $photo
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Photo $photo)
+    {
+        $photo->delete();
+
+        return response()->json([
+            'success' => true,
+        ]);
+    }
 }
