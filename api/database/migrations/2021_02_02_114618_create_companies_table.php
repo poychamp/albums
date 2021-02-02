@@ -18,7 +18,14 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('catch_phrase');
             $table->string('bs');
+            $table->foreignId('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
