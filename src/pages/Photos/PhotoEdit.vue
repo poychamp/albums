@@ -4,13 +4,15 @@
 
         <div class="row">
             <div class="col-md-8">
-                <q-banner class="bg-green text-white q-mb-lg">
+                <q-banner v-if="isShowSuccessBanner" class="bg-green text-white q-mb-lg">
                     You have successfully updated the image!
                 </q-banner>
 
-                <q-banner class="bg-red text-white q-mb-lg">
-                    Title is required.<br>
-                    URL is required.
+                <q-banner v-if="errors.length" class="bg-red text-white q-mb-lg">
+                    <div v-for="(error, i) in errors"
+                       :key="i">
+                        {{ error}}
+                    </div>
                 </q-banner>
 
                 <q-form
@@ -58,7 +60,9 @@ export default {
   name: 'PhotoEdit',
 
   data: () => ({
-    photo: {}
+    isShowSuccessBanner: false,
+    photo: {},
+    errors: []
   }),
 
   methods: {
@@ -67,7 +71,17 @@ export default {
     },
 
     onFormSubmit () {
-      console.log('something')
+      this.isShowSuccessBanner = false
+      this.errors = []
+
+      api.put(`/api/photos/${this.photo.id}`, this.photo)
+        .then(r => {
+          this.isShowSuccessBanner = true
+        }).catch(e => {
+          for (const field in e.response.data.errors) {
+            this.errors.push(e.response.data.errors[field][0])
+          }
+        })
     }
   }
 }
