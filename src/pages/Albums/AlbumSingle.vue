@@ -99,7 +99,10 @@ export default {
     },
 
     onClickYesRemovePhotoBtn () {
-      this.photos.splice(this.removePhoto.index, 1)
+      api.delete(`/api/photos/${this.removePhoto.id}`)
+        .then(r => {
+          this.photos.splice(this.removePhoto.index, 1)
+        })
     }
   }
 }
