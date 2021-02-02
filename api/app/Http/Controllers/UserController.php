@@ -17,4 +17,14 @@ class UserController extends Controller
             User::paginate(15)
         );
     }
+
+    /**
+     * @param \App\Models\User $user
+     *
+     * @return \App\Http\Resources\UserResource
+     */
+    public function show(User $user)
+    {
+        return new UserResource($user);
+    }
 }
