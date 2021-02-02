@@ -27,6 +27,7 @@ Route::group(['prefix' => 'photos'], function() {
 });
 
 Route::group(['prefix' => 'users'], function() {
+    Route::get('/{user}/albums', [\App\Http\Controllers\AlbumController::class, 'user']);
     Route::get('/{user}', [\App\Http\Controllers\UserController::class, 'show']);
     Route::get('/', [\App\Http\Controllers\UserController::class, 'index']);
 });

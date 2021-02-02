@@ -6,6 +6,7 @@ use App\Http\Resources\AlbumResource;
 use App\Http\Resources\PhotoResource;
 use App\Models\Album;
 use App\Models\Photo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -39,5 +40,17 @@ class AlbumController extends Controller
     public function show(Album $album)
     {
         return new AlbumResource($album);
+    }
+
+    /**
+     * @param \App\Models\User $user
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function user(User $user)
+    {
+        $albums = Album::where('user_id', $user->id)->paginate(15);
+
+        return AlbumResource::collection($albums);
     }
 }
