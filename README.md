@@ -1,26 +1,16 @@
 # albums (albums)
 
-app built with quasar
+App built with Quasar in the frontend and Laravel in the backend 
 
-## Install the dependencies
-```bash
-npm install
-```
+## Frontend
+* Go to /
+* `npm install`
+* Edit `baseUrl` in `src/boot/axios.js` if needed
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
-
-### Lint the files
-```bash
-npm run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+## Backend
+* Go to /app
+* `composer install`
+* Copy `.env.example` to `.env`
+* `php artisan key:generate`
+* Edit `.env` and configure the `DB_` values
+* `php artisan migrate:fresh --seed`
