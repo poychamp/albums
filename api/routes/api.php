@@ -22,6 +22,7 @@ Route::group(['prefix' => 'albums'], function() {
 
 Route::group(['prefix' => 'photos'], function() {
     Route::get('/{photo}', [\App\Http\Controllers\PhotoController::class, 'show']);
+    Route::put('/{photo}', [\App\Http\Controllers\PhotoController::class, 'update']);
     Route::delete('/{photo}', [\App\Http\Controllers\PhotoController::class, 'destroy']);
 });
 

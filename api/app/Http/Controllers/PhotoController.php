@@ -18,6 +18,19 @@ class PhotoController extends Controller
         return new PhotoResource($photo);
     }
 
+    public function update(Photo $photo, Request $request)
+    {
+        $data = $request->validate([
+            'title'         => ['required'],
+            'url'           => ['required', 'url'],
+            'thumbnail_url' => ['required', 'url'],
+        ]);
+
+        $photo->update($data);
+
+        return new PhotoResource($photo);
+    }
+
     /**
      * @param \App\Models\Photo $photo
      *
