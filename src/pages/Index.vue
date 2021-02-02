@@ -4,9 +4,9 @@
                          class="row"
                          :offset="250">
         <div v-for="(album, index) in albums" :key="index" class="text-center col-md-4">
-          <a href="#">
+          <router-link :to="{ name: 'albums.single', params: { id: album.id }}">
             <h2 class="text-h5">{{ album.title }}</h2>
-          </a>
+          </router-link>
         </div>
 
         <template v-slot:loading>
