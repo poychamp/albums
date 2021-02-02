@@ -6,6 +6,7 @@ App built with Quasar in the frontend and Laravel in the backend
 * Go to `/`
 * `npm install`
 * Edit `baseUrl` in `src/boot/axios.js` accordingly. This is your API's base URL.
+* Run using `quasar dev`
 
 ## Backend
 * Go to `/api`
@@ -14,3 +15,4 @@ App built with Quasar in the frontend and Laravel in the backend
 * `php artisan key:generate`
 * Edit `.env` and configure the `DB_` values
 * `php artisan migrate:fresh --seed`
+* Run using `php artisan serve`
