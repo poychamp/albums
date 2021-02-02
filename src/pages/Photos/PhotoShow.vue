@@ -7,15 +7,26 @@
 </template>
 
 <script>
+import { api } from 'boot/axios'
+
 export default {
   name: 'PhotoShow.vue',
 
+  async beforeRouteEnter (to, from, next) {
+    const { data } = await api.get(`/api/photos/${to.params.id}`)
+
+    next(vm => vm.setData(data.data))
+  },
+
   data: () => ({
-    photo: {
-      title: 'Some Title',
-      url: 'https://via.placeholder.com/600/771796'
+    photo: {}
+  }),
+
+  methods: {
+    setData (photo) {
+      this.photo = photo
     }
-  })
+  }
 }
 </script>
 
