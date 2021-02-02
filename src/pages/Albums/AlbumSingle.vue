@@ -15,7 +15,9 @@
                 />
 
                 <div class="text-center">
-                    <q-btn color="primary" class="q-mr-xs" label="View" />
+                    <router-link :to="{ name: 'photos.show', params: { id: photo.id } }">
+                        <q-btn color="primary" class="q-mr-xs" label="View" />
+                    </router-link>
                     <q-btn color="secondary" class="q-mr-xs" label="Edit" />
                     <q-btn color="deep-orange" label="Remove" />
                 </div>
